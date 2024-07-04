@@ -41,59 +41,59 @@
     <br />
 </div>
 
-<script>
-    $("#profile-img-btn_lg").click(() => {
-        $("#profile-img-input").click(); // 파일 선택창이 뜬다.
-    });
+<!--<script>-->
+<!--    $("#profile-img-btn_lg").click(() => {-->
+<!--        $("#profile-img-input").click(); // 파일 선택창이 뜬다.-->
+<!--    });-->
 
-    $("#profile-img-input").change((event) => {
-        profileImgUpdate(event);
-    }); // 파일을 선택하면!!
+<!--    $("#profile-img-input").change((event) => {-->
+<!--        profileImgUpdate(event);-->
+<!--    }); // 파일을 선택하면!!-->
 
-    async function profileImgUpdate(event) {
+<!--    async function profileImgUpdate(event) {-->
 
-        // image/png 이런식의 파일임.
-        let f = event.target.files[0];
+<!--        // image/png 이런식의 파일임.-->
+<!--        let f = event.target.files[0];-->
 
-        if (!f.type.match("image.*")) {
-            alert("이미지를 선택해주세요!");
-            return;
-        }
+<!--        if (!f.type.match("image.*")) {-->
+<!--            alert("이미지를 선택해주세요!");-->
+<!--            return;-->
+<!--        }-->
 
-        let userId = $("#userId").val();
+<!--        let userId = $("#userId").val();-->
 
-        // Multipart File => header 가 필요 없음
-        // multipart/form-data 로 파일을 전송하는 것이 가장 편하다.
-        // form 태그 자바스크립트 객체 찾기 => fileForm
-        // form 태그 key:value 데이터 변환 => formData
+<!--        // Multipart File => header 가 필요 없음-->
+<!--        // multipart/form-data 로 파일을 전송하는 것이 가장 편하다.-->
+<!--        // form 태그 자바스크립트 객체 찾기 => fileForm-->
+<!--        // form 태그 key:value 데이터 변환 => formData-->
 
-        let fileForm = $("#fileForm")[0];
-        let formData = new FormData(fileForm);
+<!--        let fileForm = $("#fileForm")[0];-->
+<!--        let formData = new FormData(fileForm);-->
 
-        let response = await fetch(`/s/api/user/profile-img`, {
-            method: "put",
-            body: formData
-        });
+<!--        let response = await fetch(`/s/api/user/profile-img`, {-->
+<!--            method: "put",-->
+<!--            body: formData-->
+<!--        });-->
 
-        if (response.status == 200) {
-            imgPreview(event, f);
-        } else {
-            alert("프로파일 변경에 실패하였습니다");
-        }
-    }
+<!--        if (response.status == 200) {-->
+<!--            imgPreview(event, f);-->
+<!--        } else {-->
+<!--            alert("프로파일 변경에 실패하였습니다");-->
+<!--        }-->
+<!--    }-->
 
-    function imgPreview(event, f) {
-        let reader = new FileReader();
+<!--    function imgPreview(event, f) {-->
+<!--        let reader = new FileReader();-->
 
-        // 콜백 (파일 이미지가 객체화 되면!!)
-        reader.onload = (event) => {
-            //console.log(event.target.result);
-            $("#profile-img-btn_lg").attr("src", event.target.result);
-            $("#profile-img-btn").attr("src", event.target.result);
-        }
+<!--        // 콜백 (파일 이미지가 객체화 되면!!)-->
+<!--        reader.onload = (event) => {-->
+<!--            //console.log(event.target.result);-->
+<!--            $("#profile-img-btn_lg").attr("src", event.target.result);-->
+<!--            $("#profile-img-btn").attr("src", event.target.result);-->
+<!--        }-->
 
-        reader.readAsDataURL(f); // 비동기 실행(I/O)
-    }
-</script>
+<!--        reader.readAsDataURL(f); // 비동기 실행(I/O)-->
+<!--    }-->
+<!--</script>-->
 
 {{>/layout/footer}}
