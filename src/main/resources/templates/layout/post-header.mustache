@@ -23,20 +23,19 @@
 
 <body class="drawer drawer--left">
 
-    {{#principal}}
-    <input type="hidden" id="principal-id" value="{{id}}" />
-    {{/principal}}
+    <input type="hidden" id="principal-id" value="1" />
+
 
     <nav class="drawer-nav my_nav_slider" role="navigation">
         <ul class="drawer-menu">
             <li><a class="drawer-brand" href="/">Home</a></li>
-            {{#postRespDto.categorys}}
-            <li><a class="drawer-menu-item" href="/user/{{user.id}}/post?categoryId={{id}}">{{title}}</a></li>
-            {{/postRespDto.categorys}}
+
+            <li><a class="drawer-menu-item" href="/user/1/post?categoryId=1">제목</a></li>
+
         </ul>
 
         <div class="my_nav_slider_visit">
-            <div>방문자수 : {{postRespDto.totalCount}}</div>
+            <div>방문자수 : 1</div>
             <i class="fa-solid fa-camera"></i>
         </div>
     </nav>
@@ -58,34 +57,31 @@
 
         <!-- Navbar text-->
         <ul class="navbar-nav">
-            {{#principal}}
+
             <div class="dropdown dropleft">
                 <div data-toggle="dropdown" class="d-flex justify-content-end">
-                    {{#profileImg}}
-                    <img id="profile-img-btn" src="/upload/{{profileImg}}"
+
+                    <img id="profile-img-btn" src="/upload/1"
                         class="my_profile_rounded_img_btn dropdown-toggle">
-                    {{/profileImg}}
-                    {{^profileImg}}
+
                     <img id="profile-img-btn" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
                         class="my_profile_rounded_img_btn dropdown-toggle">
-                    {{/profileImg}}
+
                 </div>
                 <div class="dropdown-menu my_dropdown_menu">
-                    <a class="dropdown-item" href="/user/{{id}}/post">내블로그</a>
-                    <a class="dropdown-item" href="/s/user/{{id}}">계정관리</a>
+                    <a class="dropdown-item" href="/user/1/post">내블로그</a>
+                    <a class="dropdown-item" href="/s/user/1">계정관리</a>
                     <a class="dropdown-item" href="/s/category/writeForm">카테고리관리</a>
                     <a class="dropdown-item" href="/logout">로그아웃</a>
                 </div>
             </div>
 
-            {{/principal}}
-            {{^principal}}
+
 
             <div>
                 <a class="my_main_start_btn" href="/login-form">시작하기</a>
             </div>
 
-            {{/principal}}
 
 
         </ul>

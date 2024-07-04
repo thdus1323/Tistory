@@ -1,40 +1,39 @@
 {{>/layout/main-header}}
 
 <div class="container">
-    <input id="postId" type="hidden" value="{{data.post.id}}" />
-    <input id="pageOwnerId" type="hidden" value="{{data.post.user.id}}" />
-    <input id="my-loveId" type="hidden" value="{{#data.loveId}} {{data.loveId}} {{/data.loveId}}">
+    <input id="postId" type="hidden" value="1" />
+    <input id="pageOwnerId" type="hidden" value="1" />
+    <input id="my-loveId" type="hidden" value="1">
 
 
     <div class="my_post_detail_title">
-        <h2>{{data.post.title}}</h2>
+        <h2>제목</h2>
     </div>
     <hr />
 
     <div class="my_post_detail_content">
-        {{{data.post.content}}}
+   내용
     </div>
     <div class="my_post_info_box d-flex">
         <div class="my_post_info">
-            {{#data.isLove}}
-            <i class="fa-solid fa-heart my_fake_like my_mr_sm_1" id="heart-{{data.post.id}}"
-                onclick="postLikeClick('{{data.post.id}}')"></i>
-            by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
-            {{/data.isLove}}
-            {{^data.isLove}}
+
+            <i class="fa-solid fa-heart my_fake_like my_mr_sm_1" id="heart-1"
+                onclick="postLikeClick('1')"></i>
+            by <b>유저네임</b> <span class="my_text_body_sm">날짜</span>
+
             <i class="far fa-heart my_fake_un_like my_mr_sm_1" id="my-heart"
-                onclick="postLikeClick('{{data.post.id}}')"></i>
-            by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
-            {{/data.isLove}}
+                onclick="postLikeClick('1')"></i>
+            by <b>유저네임</b> <span class="my_text_body_sm">날짜</span>
+
         </div>
     </div>
 
-    {{#data.isPageOwner}}
+
     <div class="my_mt_md_1">
         <a class="btn btn-outline-success" href="#">수정</a>
         <button id="btn-delete" class="btn btn-outline-danger">삭제</button>
     </div>
-    {{/data.isPageOwner}}
+
     <br />
 
     <div class="my_livere">

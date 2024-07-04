@@ -1,55 +1,94 @@
 server:
-  port: 8080
   servlet:
-    context-path: /
     encoding:
       charset: utf-8
+      force: true
     session:
-      timeout: 30
+      # url rewrite 문제 해결
+      tracking-modes: cookie
+      timeout: 30m
+  port: 8080
 
 spring:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: 아이디
-    password: 비밀번호
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
-            required: true
-          auth: true
-  security:
-    user:
-      name: test
-      password: 1234
   mustache:
-    expose-session-attributes: true
+    servlet:
+      expose-session-attributes: true
+      expose-request-attributes: true
   datasource:
-      url: jdbc:mariadb://localhost:3306/greendb 
-      driver-class-name: org.mariadb.jdbc.Driver
-      username: green
-      password: green1234
-
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MySQL
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  #  sql:
+  #    init:
+  #      data-locations:
+  #        - classpath:db/data.sql
   jpa:
-    open-in-view: true
     hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
     show-sql: true
     properties:
-      hibernate.format_sql: true
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 10
+    defer-datasource-initialization: true
+    open-in-view: false
 
-  output:
-    ansi:
-      enabled: always
-
-file:
-  path: C:/Users/green/upload/
-
-logging:
-  level:
-    '[org.springframework.web]': DEBUG
-    '[org.hibernate]': DEBUG
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /
+#    encoding:
+#      charset: utf-8
+#    session:
+#      timeout: 30
+#
+#spring:
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: 아이디
+#    password: 비밀번호
+#    properties:
+#      mail:
+#        smtp:
+#          starttls:
+#            enable: true
+#            required: true
+#          auth: true
+#  security:
+#    user:
+#      name: test
+#      password: 1234
+#  mustache:
+#    expose-session-attributes: true
+#  datasource:
+#      url: jdbc:mariadb://localhost:3306/greendb
+#      driver-class-name: org.mariadb.jdbc.Driver
+#      username: green
+#      password: green1234
+#
+#  jpa:
+#    open-in-view: true
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    show-sql: true
+#    properties:
+#      hibernate.format_sql: true
+#
+#  output:
+#    ansi:
+#      enabled: always
+#
+#file:
+#  path: C:/Users/green/upload/
+#
+#logging:
+#  level:
+#    '[org.springframework.web]': DEBUG
+#    '[org.hibernate]': DEBUG

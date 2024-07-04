@@ -42,35 +42,33 @@
             </svg>
         </a>
 
-        {{#principal}}
+
         <div class="dropdown dropleft">
 
 
             <div data-toggle="dropdown">
-                {{#profileImg}}
-                <img id="profile-img-btn" src="/upload/{{profileImg}}"
+
+                <img id="profile-img-btn" src="#"
                     class="my_profile_rounded_img_btn dropdown-toggle">
-                {{/profileImg}}
-                {{^profileImg}}
+
                 <img id="profile-img-btn" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
                     class="my_profile_rounded_img_btn dropdown-toggle">
-                {{/profileImg}}
+
             </div>
 
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="/user/{{id}}/post">내블로그</a>
-                <a class="dropdown-item" href="/s/user/{{id}}">계정관리</a>
+                <a class="dropdown-item" href="/user/1/post">내블로그</a>
+                <a class="dropdown-item" href="/s/user/1">계정관리</a>
                 <a class="dropdown-item" href="/s/category/writeForm">카테고리관리</a>
                 <a class="dropdown-item" href="/logout">로그아웃</a>
             </div>
         </div>
 
-        {{/principal}}
-        {{^principal}}
+
         <div>
             <a class="my_main_start_btn" href="/login-form">시작하기</a>
         </div>
-        {{/principal}}
+
 
     </nav>
     <br>
