@@ -9,5 +9,12 @@ public class UserRequest {
         public String userName;
         public String userPassword;
         public String userEmail;
+
+        public JoinFormDTO(String userName, String userPassword, String userEmail) {
+            this.userName = userName;
+            this.userPassword = userPassword;
+            this.userEmail = userEmail;
+        }
     }
+
 }
