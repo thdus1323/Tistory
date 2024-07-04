@@ -79,28 +79,28 @@
 
 </div>
 
-<!--<script>-->
-<!--    function getQuill() {-->
-<!--        let quillContent = $("#editor-container .ql-editor").html();-->
-<!--        $("#content").html(quillContent);-->
-<!--        return true;-->
-<!--    }-->
-<!--</script>-->
+<script>
+    function getQuill() {
+        let quillContent = $("#editor-container .ql-editor").html();
+        $("#content").html(quillContent);
+        return true;
+    }
+</script>
 
-<!--&lt;!&ndash; Include the Quill library &ndash;&gt;-->
-<!--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>-->
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-<!--<script>-->
-<!--    var quill = new Quill('#editor-container', {-->
-<!--        modules: {-->
-<!--            formula: true,-->
-<!--            syntax: true,-->
-<!--            toolbar: '#toolbar-container'-->
-<!--        },-->
-<!--        placeholder: '게시물을 작성해주세요.',-->
-<!--        theme: 'snow'-->
-<!--    });-->
-<!--</script>-->
+<script>
+    var quill = new Quill('#editor-container', {
+        modules: {
+            formula: true,
+            syntax: true,
+            toolbar: '#toolbar-container'
+        },
+        placeholder: '게시물을 작성해주세요.',
+        theme: 'snow'
+    });
+</script>
 
 
 {{>/layout/footer}}
