@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
+    @GetMapping({"/","/post/1"})
     public String index() {
         return "main";
     }
 
     //category view----------------------------------------------
 
-    @GetMapping("ca-write-form")
+    @GetMapping("/s/category/writeForm")
     public String caWriteForm() {
         return "/category/writeForm";
     }
@@ -23,17 +23,17 @@ public class IndexController {
 
     //post view----------------------------------------------
 
-    @GetMapping("detail")
+    @GetMapping("/s/user/1")
     public String detail() {
         return "/post/detail";
     }
 
-    @GetMapping("list")
+    @GetMapping("/user/1/post")
     public String list() {
         return "/post/list";
     }
 
-    @GetMapping("po-write-form")
+    @GetMapping("/s/post/write-form")
     public String poWriteForm() {
         return "/post/writeForm";
     }
@@ -52,7 +52,13 @@ public class IndexController {
         return "/user/loginForm";
     }
 
-    @GetMapping("password-reset-form")
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/user/loginForm";
+    }
+
+
+    @GetMapping("/user/password-reset-form")
     public String passwordResetForm() {
         return "/user/passwordResetForm";
     }
@@ -61,6 +67,8 @@ public class IndexController {
     public String updateForm() {
         return "/user/updateForm";
     }
+
+
 
 
 
