@@ -6,16 +6,16 @@ public class UserRequest {
 
     @Data
     public static class JoinDTO {
-        public String userName;
-        public String userPassword;
-        public String userEmail;
-        public String ConfirmPassword;
+        private String userName;
+        private String userPassword;
+        private String userEmail;
+        private String ConfirmPassword;
     }
 
     @Data
     public static class LoginDTO {
-        public String userName;
-        public String userPassword;
+        private String userName;
+        private String userPassword;
     }
 
 }
