@@ -42,15 +42,8 @@ public class IndexController {
 
     //user view----------------------------------------------
 
-    @GetMapping("join-form")
-    public String joinForm() {
-        return "/user/joinForm";
-    }
 
-    @GetMapping("login-form")
-    public String loginForm() {
-        return "/user/loginForm";
-    }
+
 
     @GetMapping("/logout")
     public String logout() {
