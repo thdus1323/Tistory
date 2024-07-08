@@ -5,20 +5,14 @@ import lombok.Data;
 public class UserRequest {
 
     @Data
-    public static class JoinFormDTO {
+    public static class JoinDTO {
         public String userName;
         public String userPassword;
         public String userEmail;
-
-//        public JoinFormDTO(String userName, String userPassword, String userEmail) {
-//            this.userName = userName;
-//            this.userPassword = userPassword;
-//            this.userEmail = userEmail;
-//        }
     }
 
     @Data
-    public static class LoginFormDTO {
+    public static class LoginDTO {
         public String userName;
         public String userPassword;
     }

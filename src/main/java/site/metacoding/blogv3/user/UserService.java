@@ -11,7 +11,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     //회원가입
-    public void joinUser(UserRequest.JoinFormDTO reqDTO){
+    public void join(UserRequest.JoinDTO reqDTO){
         User user = new User();
         user.setUserName(reqDTO.getUserName());
         user.setUserPassword(reqDTO.getUserPassword());
@@ -21,7 +21,7 @@ public class UserService {
     }
 
     //로그인
-    public User loginUser(UserRequest.LoginFormDTO reqDTO) {
+    public User login(UserRequest.LoginDTO reqDTO) {
         Optional<User> sessionUserOptional = userRepository.findByUsernameAndPassword(reqDTO.getUserName(), reqDTO.getUserPassword());
         if (sessionUserOptional.isPresent()) {
             return sessionUserOptional.get();

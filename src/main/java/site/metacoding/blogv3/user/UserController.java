@@ -14,10 +14,10 @@ public class UserController {
 
     //회원가입
     @PostMapping("/join")
-    public String join(@ModelAttribute UserRequest.JoinFormDTO reqDTO){
-        userService.joinUser(reqDTO);
+    public String join(@ModelAttribute UserRequest.JoinDTO reqDTO){
+        userService.join(reqDTO);
         System.out.println("reqDTO = " + reqDTO);
-        return "/user/loginForm";
+        return "redirect:/loginForm";
     }
 
     @GetMapping("/join-form")
@@ -25,10 +25,11 @@ public class UserController {
         return "/user/joinForm";
     }
 
+    //로그인
     @PostMapping("/login")
-    public String login(UserRequest.LoginFormDTO reqDTO) {
+    public String login(UserRequest.LoginDTO reqDTO) {
         System.out.println("reqDTO = " + reqDTO);
-        User sessionUser = userService.loginUser(reqDTO);
+        User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
@@ -37,8 +38,5 @@ public class UserController {
     public String loginForm() {
         return "/user/loginForm";
     }
-
-
-
 
 }

@@ -57,7 +57,7 @@
 
         <!-- Navbar text-->
         <ul class="navbar-nav">
-
+            {{#sessionUser}}
             <div class="dropdown dropleft">
                 <div data-toggle="dropdown" class="d-flex justify-content-end">
 
@@ -72,13 +72,13 @@
                     <a class="dropdown-item" href="/logout">로그아웃</a>
                 </div>
             </div>
+            {{/sessionUser}}
 
-
-
+            {{^sessionUser}}
             <div>
                 <a class="my_main_start_btn" href="/login-form">시작하기</a>
             </div>
-
+            {{/sessionUser}}
 
 
         </ul>
