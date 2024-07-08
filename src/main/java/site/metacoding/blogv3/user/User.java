@@ -23,6 +23,9 @@ public class User {
     private String userPassword;
 
     @Column(nullable = false)
+    private String comfirmUserPassword;
+
+    @Column(nullable = false)
     private String userEmail;
 
     @CreationTimestamp

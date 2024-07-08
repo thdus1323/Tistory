@@ -9,6 +9,7 @@ public class UserRequest {
         public String userName;
         public String userPassword;
         public String userEmail;
+        public String ConfirmPassword;
     }
 
     @Data

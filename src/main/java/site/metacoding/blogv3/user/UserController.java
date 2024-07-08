@@ -15,9 +15,14 @@ public class UserController {
     //회원가입
     @PostMapping("/join")
     public String join(@ModelAttribute UserRequest.JoinDTO reqDTO){
-        userService.join(reqDTO);
-        System.out.println("reqDTO = " + reqDTO);
-        return "redirect:/loginForm";
+        try {
+            userService.join(reqDTO);
+            System.out.println("reqDTO = " + reqDTO);
+            return "/user/loginForm";
+        } catch (RuntimeException e) {
+            System.out.println("회원가입 오류: " + e.getMessage());
+            return "redirect:/joinForm?error=" + e.getMessage(); // 에러 메시지를 포함하여 리다이렉트
+        }
     }
 
     @GetMapping("/join-form")

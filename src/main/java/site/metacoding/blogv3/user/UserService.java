@@ -12,10 +12,17 @@ public class UserService {
 
     //회원가입
     public void join(UserRequest.JoinDTO reqDTO){
+
+        // 비밀번호와 비밀번호 확인이 일치하는지 체크
+        if (!reqDTO.getUserPassword().equals(reqDTO.getConfirmPassword())) {
+            throw new RuntimeException("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
+
         User user = new User();
         user.setUserName(reqDTO.getUserName());
         user.setUserPassword(reqDTO.getUserPassword());
         user.setUserEmail(reqDTO.getUserEmail());
+        user.setComfirmUserPassword(reqDTO.getConfirmPassword());
 
         userRepository.save(user);
     }
