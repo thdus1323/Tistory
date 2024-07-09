@@ -7,7 +7,7 @@
             <div class="my_error_box my_hidden">
 
             </div>
-            <form action="/join" method="post"  enctype="application/x-www-form-urlencoded" onsubmit="return validation()">
+            <form action="/join" method="post"  enctype="application/x-www-form-urlencoded" onsubmit="return submitCheck()">
                 <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="유저네임" value="ssar"
                     maxlength="20" required />
                 <input id="password" class="my_auth_form_box_input" type="password" name="userPassword" placeholder="비밀번호" value="1234"
@@ -26,6 +26,30 @@
     </div>
     <br />
 </div>
+
+<script>
+
+    function submitCheck(){ // submit이 되면, 발동
+
+    }
+
+    let isSame = false;
+
+    function checkPasswords() {
+        let password = $("#password").val();
+        let passwordCheck = $("#same-password").val();
+
+        if (password === passwordCheck) {
+            console.log("Passwords match");
+        } else {
+            console.log("Passwords don't match");
+        }
+    }
+
+    $("#password, #passwordCheck").on('input', (e) => {
+        checkPasswords();
+    });
+</script>
 
 <!--<script src="/js/user/joinForm.js"></script>-->
 
