@@ -29,25 +29,30 @@
 
 <script>
 
-    function submitCheck(){ // submit이 되면, 발동
-
-    }
-
-    let isSame = false;
-
     function checkPasswords() {
         let password = $("#password").val();
-        let passwordCheck = $("#same-password").val();
+        let samePassword = $("#same-password").val();
 
-        if (password === passwordCheck) {
+        if (password === samePassword) {
             console.log("Passwords match");
+            return true;
         } else {
             console.log("Passwords don't match");
+            alert("비밀번호가 일치하지 않습니다.");
+            return false;
         }
     }
 
-    $("#password, #passwordCheck").on('input', (e) => {
-        checkPasswords();
+    function submitCheck() {
+        return checkPasswords();
+    }
+
+    // 회원가입 버튼에 클릭 이벤트 리스너 추가
+    $("#registerButton").on('click', (e) => {
+        if (!submitCheck()) {
+            // 비밀번호가 일치하지 않으면 폼 제출을 막음
+            e.preventDefault();
+        }
     });
 </script>
 
