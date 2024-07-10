@@ -1,5 +1,17 @@
 {{>/layout/main-header}}
 
+<style>
+    #error-log {
+        display: none;
+        color: red;
+        font-style: italic;
+    }
+    #success-log {
+        display: none;
+        color: green;
+    }
+</style>
+
 <div class="container">
     <div class="my_auth_box">
         <div class="my_auth_form_box">
@@ -14,6 +26,8 @@
                     maxlength="20" required />
                 <input id="same-password" class="my_auth_form_box_input" type="password" name="ConfirmPassword" placeholder="비밀번호 확인" value="1234"
                     maxlength="20"  required/>
+                <div id="error-log">비밀번호가 일치하지 않습니다</div>
+                <div id="success-log">비밀번호가 일치합니다</div>
                 <input class="my_auth_form_box_input" type="email" name="userEmail" placeholder="이메일" maxlength="60" value="ssar@nate.com"
                     required />
                 <button type="submit" class="my_secondary_btn">회원가입</button>
@@ -28,32 +42,32 @@
 </div>
 
 <script>
+    let isSame = false;
+
+    function submitCheck() {
+        return isSame;
+    }
 
     function checkPasswords() {
         let password = $("#password").val();
-        let samePassword = $("#same-password").val();
+        let passwordCheck = $("#same-password").val();
 
-        if (password === samePassword) {
-            console.log("Passwords match");
-            return true;
+        if (password === passwordCheck) {
+            $("#error-log").css("display","none");
+            $("#success-log").css("display","block");
+            isSame = true;
         } else {
-            console.log("Passwords don't match");
-            alert("비밀번호가 일치하지 않습니다.");
-            return false;
+            $("#success-log").css("display","none");
+            $("#error-log").css("display","block");
+            isSame = false;
         }
     }
 
-    function submitCheck() {
-        return checkPasswords();
-    }
-
-    // 회원가입 버튼에 클릭 이벤트 리스너 추가
-    $("#registerButton").on('click', (e) => {
-        if (!submitCheck()) {
-            // 비밀번호가 일치하지 않으면 폼 제출을 막음
-            e.preventDefault();
-        }
+    $("#password, #same-password").on('input', (e) => {
+        checkPasswords();
     });
+
+
 </script>
 
 <!--<script src="/js/user/joinForm.js"></script>-->
