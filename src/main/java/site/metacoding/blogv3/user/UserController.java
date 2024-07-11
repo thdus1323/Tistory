@@ -44,4 +44,13 @@ public class UserController {
         return "/user/loginForm";
     }
 
+    //비밀번호 변경
+    @PostMapping("/s/user")
+    public String update(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
+        System.out.println("reqDTO = " + reqDTO);
+        userService.changePassword(reqDTO);
+        return "redirect:/";
+    }
+
+
 }

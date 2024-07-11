@@ -14,5 +14,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     //로그인
     @Query("SELECT u FROM User u WHERE u.userName = :userName AND u.userPassword = :userPassword")
     Optional<User> findByUsernameAndPassword(@Param("userName") String userName, @Param("userPassword") String userPassword);
+
+    //비밀번호 변경
+    @Query("UPDATE User u SET  u.userPassword = :userPassword")
+    User updateUserPassword(@Param("userPassword") String userPassword);
+
 }
 

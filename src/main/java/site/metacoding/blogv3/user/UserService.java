@@ -37,4 +37,7 @@ public class UserService {
         }
     }
 
+    //비밀번호 변경
+    public void changePassword(UserRequest.ChangePasswordDTO reqDTO) {}
+
 }

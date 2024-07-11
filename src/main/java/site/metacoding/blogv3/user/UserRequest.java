@@ -18,4 +18,11 @@ public class UserRequest {
         private String userPassword;
     }
 
+    @Data
+    public class ChangePasswordDTO {
+        private String userName;
+        private String userPassword;
+        private String newPassword;
+        private String userEmail;
+    }
 }
