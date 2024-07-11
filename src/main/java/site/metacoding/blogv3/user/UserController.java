@@ -45,11 +45,29 @@ public class UserController {
     }
 
     //비밀번호 변경
-    @PostMapping("/s/user")
-    public String update(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
-        System.out.println("reqDTO = " + reqDTO);
-        userService.changePassword(reqDTO);
-        return "redirect:/";
+//    @PostMapping("/s/user")
+//    public String update(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
+//        System.out.println("reqDTO = " + reqDTO);
+//        userService.changePassword(reqDTO);
+//        return "redirect:/";
+//    }
+
+    @GetMapping("/s/user")
+    public String updateForm() {
+        return "/user/updateForm";
+    }
+
+    @PostMapping("/updatePassword")
+    public String updatePassword(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO){
+        try{
+            System.out.println("updateReqDTO = " + reqDTO);
+            userService.updatePassword(reqDTO);
+            System.out.println("비밀번호 변경 성공!");
+            return  "/user/loginForm";
+        }catch (Exception e){
+            return "비밀번호 변경 실패!" + e.getMessage();
+        }
+
     }
 
 

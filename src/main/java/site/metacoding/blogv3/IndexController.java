@@ -56,10 +56,7 @@ public class IndexController {
         return "/user/passwordResetForm";
     }
 
-    @GetMapping("/s/user")
-    public String updateForm() {
-        return "/user/updateForm";
-    }
+
 
 
 

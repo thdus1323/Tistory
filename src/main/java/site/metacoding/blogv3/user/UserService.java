@@ -2,6 +2,7 @@ package site.metacoding.blogv3.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -38,6 +39,17 @@ public class UserService {
     }
 
     //비밀번호 변경
-    public void changePassword(UserRequest.ChangePasswordDTO reqDTO) {}
-
+//    public void changePassword(UserRequest.ChangePasswordDTO reqDTO) {}
+    @Transactional
+    public void updatePassword(UserRequest.ChangePasswordDTO reqDTO){
+        User user = userRepository.findByUserName(reqDTO.getUserName());
+        if(user != null){
+            if(user.getUserPassword().equals(reqDTO.getUserPassword())){
+                user.setUserPassword(reqDTO.getNewPassword());
+                userRepository.save(user);
+            }else {
+                throw new RuntimeException("해당 userId를 찾을 수 없습니다");
+            }
+        }
+    }
 }
