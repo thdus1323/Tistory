@@ -63,7 +63,7 @@ public class UserController {
             //dto에 뭐가 담겼니?
             userService.updatePassword(reqDTO, sessionUser);
             //비밀번호 담아서 서비스에 보내지 => password 새것으로 바꾸려고
-            User session = session.getAttribute("sessionUser");
+            User user = (User) session.getAttribute("sessionUser");
             //세션에서 sessionUser 정보를 가져와서 sessionUser에 담아. =>왜? 머스태치에 뿌려야지!
             if(session == null){
                 throw new RuntimeException("로그인이 필요합니다.");
