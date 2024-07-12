@@ -3,6 +3,7 @@ package site.metacoding.blogv3.user;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,6 +37,7 @@ public class UserController {
         System.out.println("reqDTO = " + reqDTO);
         User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
+        System.out.println("sessionUser = " + sessionUser);
         return "redirect:/";
     }
 
@@ -53,7 +55,12 @@ public class UserController {
 //    }
 
     @GetMapping("/s/user")
-    public String updateForm() {
+    public String updateForm(HttpSession session, Model model) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser != null) {
+            model.addAttribute("userName", sessionUser.getUserName());
+            model.addAttribute("userEmail", sessionUser.getUserEmail());
+        }
         return "/user/updateForm";
     }
 
