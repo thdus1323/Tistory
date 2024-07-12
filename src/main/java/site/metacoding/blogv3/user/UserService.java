@@ -39,17 +39,17 @@ public class UserService {
     }
 
     //비밀번호 변경
-//    public void changePassword(UserRequest.ChangePasswordDTO reqDTO) {}
     @Transactional
     public void updatePassword(UserRequest.ChangePasswordDTO reqDTO){
-        User user = userRepository.findByUserName(reqDTO.getUserName());
+        User user = userRepository.findByUserPassword(reqDTO.getUserPassword());
         if(user != null){
             if(user.getUserPassword().equals(reqDTO.getUserPassword())){
                 user.setUserPassword(reqDTO.getNewPassword());
-                userRepository.save(user);
+//                userRepository.save(user);
             }else {
-                throw new RuntimeException("해당 userId를 찾을 수 없습니다");
+                throw new RuntimeException("비밀번호가 틀렸습니다.");
             }
+            //영속화된 객체 수정은 자동 쿼리 짜준다. 더티체킹-v
         }
     }
 }

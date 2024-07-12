@@ -15,7 +15,7 @@ public class UserController {
 
     //회원가입
     @PostMapping("/join")
-    public String join(@ModelAttribute UserRequest.JoinDTO reqDTO){
+    public String join(UserRequest.JoinDTO reqDTO){
         try {
             userService.join(reqDTO);
             System.out.println("reqDTO = " + reqDTO);
@@ -46,39 +46,36 @@ public class UserController {
         return "/user/loginForm";
     }
 
-    //비밀번호 변경
-//    @PostMapping("/s/user")
-//    public String update(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
-//        System.out.println("reqDTO = " + reqDTO);
-//        userService.changePassword(reqDTO);
-//        return "redirect:/";
-//    }
 
     @GetMapping("/s/user")
-    public String updateForm(HttpSession session, @ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
+    public String updateForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser != null) {
-            reqDTO.setUserName(sessionUser.getUserName());
-            reqDTO.setUserEmail(sessionUser.getUserEmail());
+        if (sessionUser == null) {
+            throw new RuntimeException("인증되지 않았습니다");
         }
         return "/user/updateForm";
     }
 
     @PostMapping("/updatePassword")
-    public String updatePassword(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO, HttpSession session){
+    public String updatePassword(UserRequest.ChangePasswordDTO reqDTO, User user){
         try{
+            System.out.println("updateReqDTO = " + reqDTO);
+            //dto에 뭐가 담겼니?
+            userService.updatePassword(reqDTO);
+            //비밀번호 담아서 서비스에 보내지 => password 새것으로 바꾸려고
             User sessionUser = (User) session.getAttribute("sessionUser");
+            //세션에서 sessionUser 정보를 가져와서 sessionUser에 담아. =>왜? 머스태치에 뿌려야지!
             if(sessionUser == null){
                 throw new RuntimeException("로그인이 필요합니다.");
+                //세션 user 값이 없다면, 로그인 값이 없는 거니까 로그인하라고 말해야지.
+            }else {
+                //sessionUser 값이 있다면, 회원정보 변경해야지.
+                userService.updatePassword(reqDTO);
+                //비밀번호 dto담은 거라 서비스로 보내
+                System.out.println("비밀번호 변경 성공!");
+                return  "/user/loginForm";
             }
 
-            reqDTO.setUserName(sessionUser.getUserName());
-            reqDTO.setUserEmail(sessionUser.getUserEmail());
-
-            System.out.println("updateReqDTO = " + reqDTO);
-            userService.updatePassword(reqDTO);
-            System.out.println("비밀번호 변경 성공!");
-            return  "/user/loginForm";
         }catch (Exception e){
             return "비밀번호 변경 실패!" + e.getMessage();
         }

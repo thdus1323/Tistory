@@ -22,13 +22,13 @@
             <!-- 수정은 put 요청 fetch 사용해야함 -->
             <form action="/updatePassword" method="post" enctype="application/x-www-form-urlencoded">
 
-                <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="유저네임" maxlength="20" value="{{userName}}"
+                <input id="username" class="my_auth_form_box_input" type="text" placeholder="유저네임" maxlength="20" value="{{sessionUser.userName}}"
                     required readonly />
-                <input id="password" class="my_auth_form_box_input" type="password" name="userPassword" placeholder="기존 비밀번호" maxlength="20" value="1234"
+                <input id="password" class="my_auth_form_box_input" type="password" name="userPassword" placeholder="기존 비밀번호" maxlength="20" value=""
                     required />
                 <input id="same-password" class="my_auth_form_box_input" type="password" name="newPassword" placeholder="수정 비밀번호"
-                    maxlength="20" value="12345" required />
-                <input class="my_auth_form_box_input" type="email" name="userEmail" placeholder="이메일" maxlength="60" value="{{userEmail}}"
+                    maxlength="20" value="" required />
+                <input class="my_auth_form_box_input" type="email" placeholder="이메일" maxlength="60" value="{{sessionUser.userEmail}}"
                     required readonly />
                 <button type="submit" class="my_secondary_btn">회원정보수정</button>
             </form>

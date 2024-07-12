@@ -20,9 +20,9 @@ public class UserRequest {
 
     @Data
     public static class ChangePasswordDTO {
-        private String userName;
+//        private String userName;
         private String userPassword;
         private String newPassword;
-        private String userEmail;
+//        private String userEmail;
     }
 }
