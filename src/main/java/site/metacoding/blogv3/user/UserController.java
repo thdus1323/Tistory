@@ -55,18 +55,26 @@ public class UserController {
 //    }
 
     @GetMapping("/s/user")
-    public String updateForm(HttpSession session, Model model) {
+    public String updateForm(HttpSession session, @ModelAttribute UserRequest.ChangePasswordDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser != null) {
-            model.addAttribute("userName", sessionUser.getUserName());
-            model.addAttribute("userEmail", sessionUser.getUserEmail());
+            reqDTO.setUserName(sessionUser.getUserName());
+            reqDTO.setUserEmail(sessionUser.getUserEmail());
         }
         return "/user/updateForm";
     }
 
     @PostMapping("/updatePassword")
-    public String updatePassword(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO){
+    public String updatePassword(@ModelAttribute UserRequest.ChangePasswordDTO reqDTO, HttpSession session){
         try{
+            User sessionUser = (User) session.getAttribute("sessionUser");
+            if(sessionUser == null){
+                throw new RuntimeException("로그인이 필요합니다.");
+            }
+
+            reqDTO.setUserName(sessionUser.getUserName());
+            reqDTO.setUserEmail(sessionUser.getUserEmail());
+
             System.out.println("updateReqDTO = " + reqDTO);
             userService.updatePassword(reqDTO);
             System.out.println("비밀번호 변경 성공!");
