@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 //    @Query("UPDATE User u SET  u.userPassword = :userPassword")
 //    User updateUserPassword(@Param("userPassword") String userPassword);
 
-    //
+    //비밀번호 변경
     User findByUserPassword(String userPassword);
 
 }
