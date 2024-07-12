@@ -40,8 +40,8 @@ public class UserService {
 
     //비밀번호 변경
     @Transactional
-    public void updatePassword(UserRequest.ChangePasswordDTO reqDTO){
-        User user = userRepository.findByUserPassword(reqDTO.getUserPassword());
+    public void updatePassword(UserRequest.ChangePasswordDTO reqDTO, User sessionUser){
+        User user = userRepository.findByUserName(sessionUser.getUserName());
         if(user != null){
             if(user.getUserPassword().equals(reqDTO.getUserPassword())){
                 user.setUserPassword(reqDTO.getNewPassword());
