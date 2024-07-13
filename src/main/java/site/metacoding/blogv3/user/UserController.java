@@ -57,20 +57,18 @@ public class UserController {
     }
 
     @PostMapping("/updatePassword")
-    public String updatePassword(UserRequest.ChangePasswordDTO reqDTO, User sessionUser){
+    public String updatePassword(UserRequest.ChangePasswordDTO reqDTO){
         try{
             System.out.println("updateReqDTO = " + reqDTO);
             //dto에 뭐가 담겼니?
-            userService.updatePassword(reqDTO, sessionUser);
-            //비밀번호 담아서 서비스에 보내지 => password 새것으로 바꾸려고
             User user = (User) session.getAttribute("sessionUser");
             //세션에서 sessionUser 정보를 가져와서 sessionUser에 담아. =>왜? 머스태치에 뿌려야지!
-            if(session == null){
+            if(user == null){
                 throw new RuntimeException("로그인이 필요합니다.");
                 //세션 user 값이 없다면, 로그인 값이 없는 거니까 로그인하라고 말해야지.
             }else {
                 //sessionUser 값이 있다면, 회원정보 변경해야지.
-                userService.updatePassword(reqDTO, sessionUser);
+                userService.updatePassword(reqDTO, user);
                 //비밀번호 dto담은 거라 서비스로 보내
                 System.out.println("비밀번호 변경 성공!");
                 return  "/user/loginForm";

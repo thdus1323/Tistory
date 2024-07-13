@@ -1,5 +1,6 @@
 package site.metacoding.blogv3.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
 
     //회원가입
     public void join(UserRequest.JoinDTO reqDTO){
@@ -41,8 +43,15 @@ public class UserService {
     //비밀번호 변경
     @Transactional
     public void updatePassword(UserRequest.ChangePasswordDTO reqDTO, User sessionUser){
+        System.out.println("reqDTO = " + reqDTO);
+        System.out.println("sessionUser111 = " + sessionUser);
+
+        if(sessionUser.getUserName() == null){
+            throw new RuntimeException("해당 userName이 null입니다");
+        }
+
         User user = userRepository.findByUserName(sessionUser.getUserName());
-        if(user != null){
+        if(user.getUserName() != null){
             if(user.getUserPassword().equals(reqDTO.getUserPassword())){
                 user.setUserPassword(reqDTO.getNewPassword());
 //                userRepository.save(user);
