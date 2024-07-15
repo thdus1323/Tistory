@@ -58,7 +58,6 @@ public class UserController {
 
     @PostMapping("/updatePassword")
     public String updatePassword(UserRequest.ChangePasswordDTO reqDTO){
-        try{
             System.out.println("updateReqDTO = " + reqDTO);
             //dto에 뭐가 담겼니?
             User user = (User) session.getAttribute("sessionUser");
@@ -71,14 +70,7 @@ public class UserController {
                 userService.updatePassword(reqDTO, user);
                 //비밀번호 dto담은 거라 서비스로 보내
                 System.out.println("비밀번호 변경 성공!");
-                return  "/user/loginForm";
+                return  "redirect:login-form";
             }
-
-        }catch (Exception e){
-            return "비밀번호 변경 실패!" + e.getMessage();
-        }
-
     }
-
-
 }

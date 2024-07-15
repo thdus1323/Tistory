@@ -42,3 +42,7 @@
     height: 200px;
     border-bottom: 1px solid rgb(25, 25, 25);
 }
+/* 이미지 맞추기 */
+.my_main_item_thumnail img{
+    object-fit: cover;
+}
