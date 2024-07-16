@@ -10,6 +10,27 @@
         display: none;
         color: green;
     }
+
+    .username-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .my_auth_form_box_input{
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .check_username_button{
+        height: 30px;
+        padding: 0 10px;
+        white-space: nowrap;
+        font-size: 13px;
+        margin-left: 10px;
+    }
+
+
+
 </style>
 
 <div class="container">
@@ -20,8 +41,11 @@
 
             </div>
             <form action="/join" method="post"  enctype="application/x-www-form-urlencoded" onsubmit="return submitCheck()">
-                <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="유저네임" value="ssar"
-                    maxlength="20" required />
+                <div class="username-container">
+                    <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="유저네임" value="ssar"
+                           maxlength="20" required />
+                    <button type="button" class="check_username_button" onclick="checkUsername()">중복체크</button>
+                </div>
                 <input id="password" class="my_auth_form_box_input" type="password" name="userPassword" placeholder="비밀번호" value="1234"
                     maxlength="20" required />
                 <input id="same-password" class="my_auth_form_box_input" type="password" name="ConfirmPassword" placeholder="비밀번호 확인" value="1234"
@@ -43,9 +67,20 @@
 
 <script>
     let isSame = false;
+    let isPass = false;
 
     function submitCheck() {
-        return isSame;
+        if (isSame === false) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+
+        if (isPass === false) {
+            alert("유저네임 중복체크가 필요합니다.");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function checkPasswords() {
@@ -63,10 +98,16 @@
         }
     }
 
+    function checkUsername(){
+        let username = $("#username").val();
+        //통신하고
+        alert(username + "중복체크 완료");
+        isPass = true;
+    }
+
     $("#password, #same-password").on('input', (e) => {
         checkPasswords();
     });
-
 
 </script>
 
