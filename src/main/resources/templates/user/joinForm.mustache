@@ -101,8 +101,27 @@
     function checkUsername(){
         let username = $("#username").val();
         //통신하고
-        alert(username + "중복체크 완료");
-        isPass = true;
+
+        console.log("username", username);
+
+        $.ajax({
+            url: "/usernameCheck?username="+username,
+            method: "get",
+        }).done(res=>{
+            console.log("성공", res);
+            if(res === "ok"){
+                isPass = false;
+                alert(username + "중복되었습니다");
+            }
+            else{
+                isPass = true;
+                alert(username + "아이디를 사용할 수 있어요");
+            }
+        }).fail(res=>{
+            console.log("실패", res);
+        });
+
+
     }
 
     $("#password, #same-password").on('input', (e) => {

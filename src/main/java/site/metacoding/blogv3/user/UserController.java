@@ -6,12 +6,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
+import static org.springframework.util.ClassUtils.isPresent;
+
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+
+    // 파일응답(Controller, ViewResolover 발동), 데이터응답(ResponseBody, MessageConverter)
+    // Query String 공부하기
+    // 동일 한 유저네임이 있어? 하고 물어보는거니까? 조회용도!!
+    // http://localhost:8080/usernameCheck?username=ssar
+    @GetMapping("/usernameCheck")
+    public @ResponseBody String usernameCheck(@RequestParam String username){
+        // DB에 username이 ssar인 친구가 있어? -> service, repository
+
+        System.out.println("username : "+username);
+        User user = userService.findUserName(username); // DB에서 username이 ssar인 사람이 있는지 확인
+        if(user != null){
+            return "no"; // no(중복안됨)
+        }
+        return "ok"; // ok(중복됨), no(중복안됨)
+    }
 
     //회원가입
     @PostMapping("/join")

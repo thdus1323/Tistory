@@ -61,4 +61,10 @@ public class UserService {
             //영속화된 객체 수정은 자동 쿼리 짜준다. 더티체킹-v
         }
     }
+
+    //유저네임 조회
+    public User findUserName(String userName){
+        return userRepository.findUserName(userName)
+                .orElseThrow(() -> new RuntimeException("해당 userName이 존재하지 않습니다."));}
+
 }
