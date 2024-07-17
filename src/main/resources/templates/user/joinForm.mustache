@@ -109,8 +109,14 @@
     let canUseEmail = false; // 이메일 사용할 수 있니?
 
 
-    //비밀번호 일치
+
     function submitCheck() {
+        console.log("submitCheck 호출됨");
+        console.log("isSame:"+isSame);
+        console.log("canUseUserName : "+ canUseUserName);
+        console.log("canUseEmail : "+ canUseEmail);
+
+        //비밀번호 일치
         if (isSame === false) {
             alert("비밀번호가 일치하지 않습니다.");
             return false;
@@ -120,14 +126,15 @@
         if (canUseUserName === false) {
             alert("유저네임 중복체크가 필요합니다.");
             return false;
-        } else {
-            return true;
         }
 
+        //이메일 인증 체크
         if (canUseEmail === false) {
             alert("이메일 인증이 필요합니다.");
             return false;
-        } return true;
+        }
+
+        return true;
     }
 
     function checkPasswords() {
