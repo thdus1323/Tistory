@@ -26,11 +26,11 @@ public class UserController {
         // DB에 username이 ssar인 친구가 있어? -> service, repository
 
         System.out.println("username : "+username);
-        boolean isAvailable = userService.isUsernameAvailable(username);
-        if(isAvailable){
-            return "no"; // no(username 중복안됨)
+        boolean isExists = userService.isUsernameExists(username);
+        if(isExists){
+            return "userNameIsNotExists"; // no(username 중복안됨)
         } else {
-            return "ok"; //ok(username 중복됨.)
+            return "userNameIsExists"; //ok(username 중복됨.)
         }
     }
 

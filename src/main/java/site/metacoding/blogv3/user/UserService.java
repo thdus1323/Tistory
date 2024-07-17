@@ -63,7 +63,7 @@ public class UserService {
     }
 
     //유저네임 조회
-    public boolean isUsernameAvailable(String username){
+    public boolean isUsernameExists(String username){
         return userRepository.findUserName(username).isEmpty();
     }
 
