@@ -16,6 +16,11 @@
         align-items: center;
     }
 
+    .userEmail-container {
+        display: flex;
+        align-items: center;
+    }
+
     .my_auth_form_box_input{
         flex: 1;
         margin-right: 10px;
@@ -23,11 +28,37 @@
 
     .check_username_button{
         height: 30px;
+        padding: 0 15px;
+        white-space: nowrap;
+        font-size: 13px;
+        margin-left: 15px;
+    }
+
+    .check_userEmail_button{
+        height: 30px;
         padding: 0 10px;
         white-space: nowrap;
         font-size: 13px;
         margin-left: 10px;
     }
+
+    .verify-userEmail-container{
+        display: none;
+        align-items: center;
+    }
+
+    .verify_userEmail_button{
+        height: 30px;
+        padding: 0 16px;
+        white-space: nowrap;
+        font-size: 13px;
+        margin-left: 10px;
+    }
+
+    .my_secondary_btn{
+        margin: 30px 0;
+    }
+
 
 
 
@@ -36,10 +67,8 @@
 <div class="container">
     <div class="my_auth_box">
         <div class="my_auth_form_box">
-            <div class="my_auth_form_box_title">HStory</div>
-            <div class="my_error_box my_hidden">
-
-            </div>
+            <div class="my_auth_form_box_title">JStory</div>
+            <div class="my_error_box my_hidden"></div>
             <form action="/join" method="post"  enctype="application/x-www-form-urlencoded" onsubmit="return submitCheck()">
                 <div class="username-container">
                     <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="유저네임" value="ssar"
@@ -52,8 +81,17 @@
                     maxlength="20"  required/>
                 <div id="error-log">비밀번호가 일치하지 않습니다</div>
                 <div id="success-log">비밀번호가 일치합니다</div>
-                <input class="my_auth_form_box_input" type="email" name="userEmail" placeholder="이메일" maxlength="60" value="ssar@nate.com"
-                    required />
+                <div class="userEmail-container">
+                    <input id="userEmail" class="my_auth_form_box_input" type="email" name="userEmail" placeholder="이메일" maxlength="60" value="ssar@nate.com"
+                            required />
+                    <button type="button" class="check_userEmail_button" onclick="checkEmail()">이메일인증</button>
+                </div>
+                <div id="verifyEmailContainer" class="verify-userEmail-container">
+                    <input class="my_auth_form_box_input" type="text" name="verifyUserEmail" placeholder="인증번호 6자리" maxlength="6"
+                           required />
+                    <button type="button" class="verify_userEmail_button" >인증하기</button>
+                </div>
+
                 <button type="submit" class="my_secondary_btn">회원가입</button>
             </form>
             <div class="my_auth_form_box_link">
@@ -68,6 +106,8 @@
 <script>
     let isSame = false; //비밀번호 같니?
     let canUseUserName = false; //유저네임 통과니?
+    let canUseEmail = false; // 이메일 사용할 수 있니?
+
 
     //비밀번호 일치
     function submitCheck() {
@@ -83,6 +123,11 @@
         } else {
             return true;
         }
+
+        if (canUseEmail === false) {
+            alert("이메일 인증이 필요합니다.");
+            return false;
+        } return true;
     }
 
     function checkPasswords() {
@@ -123,8 +168,15 @@
         }).fail(res=>{
             console.log("실패", res);
         });
+    }
 
+    function checkEmail(){
+        let userEmail = $("#userEmail").val();
+        console.log("email", userEmail);
 
+        //이메일 인증 성공하면 인증번호 입력 필드, 버튼 표시
+        $("#verifyEmailContainer").css("display", "flex");
+        canUseEmail = true; // 임시로 이메일 인증 성공
     }
 
     $("#password, #same-password").on('input', (e) => {
