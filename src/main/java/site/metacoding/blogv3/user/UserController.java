@@ -21,16 +21,17 @@ public class UserController {
     // Query String 공부하기
     // 동일 한 유저네임이 있어? 하고 물어보는거니까? 조회용도!!
     // http://localhost:8080/usernameCheck?username=ssar
-    @GetMapping("/usernameCheck")
+    @GetMapping("/usernameCheck") //usernameCheck get 메서드
     public @ResponseBody String usernameCheck(@RequestParam String username){
         // DB에 username이 ssar인 친구가 있어? -> service, repository
 
         System.out.println("username : "+username);
-        User user = userService.findUserName(username); // DB에서 username이 ssar인 사람이 있는지 확인
-        if(user != null){
-            return "no"; // no(중복안됨)
+        boolean isAvailable = userService.isUsernameAvailable(username);
+        if(isAvailable){
+            return "no"; // no(username 중복안됨)
+        } else {
+            return "ok"; //ok(username 중복됨.)
         }
-        return "ok"; // ok(중복됨), no(중복안됨)
     }
 
     //회원가입

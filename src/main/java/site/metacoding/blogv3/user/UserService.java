@@ -63,8 +63,8 @@ public class UserService {
     }
 
     //유저네임 조회
-    public User findUserName(String userName){
-        return userRepository.findUserName(userName)
-                .orElseThrow(() -> new RuntimeException("해당 userName이 존재하지 않습니다."));}
+    public boolean isUsernameAvailable(String username){
+        return userRepository.findUserName(username).isEmpty();
+    }
 
 }

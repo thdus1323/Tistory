@@ -36,7 +36,7 @@
 <div class="container">
     <div class="my_auth_box">
         <div class="my_auth_form_box">
-            <div class="my_auth_form_box_title">JSotry</div>
+            <div class="my_auth_form_box_title">HStory</div>
             <div class="my_error_box my_hidden">
 
             </div>
@@ -66,15 +66,17 @@
 </div>
 
 <script>
-    let isSame = false;
-    let isPass = false;
+    let isSame = false; //비밀번호 같니?
+    let isPass = false; //유저네임 통과니?
 
+    //비밀번호 일치
     function submitCheck() {
         if (isSame === false) {
             alert("비밀번호가 일치하지 않습니다.");
             return false;
         }
 
+        //유저네임 중복체크
         if (isPass === false) {
             alert("유저네임 중복체크가 필요합니다.");
             return false;
@@ -100,20 +102,21 @@
 
     function checkUsername(){
         let username = $("#username").val();
-        //통신하고
+        //통신
 
         console.log("username", username);
 
         $.ajax({
+            //get으로 usernameCheck해서 username을 받아오면
             url: "/usernameCheck?username="+username,
             method: "get",
         }).done(res=>{
             console.log("성공", res);
-            if(res === "ok"){
+            if(res === "ok"){ //res가 ok이면 통과못함.
                 isPass = false;
                 alert(username + "중복되었습니다");
             }
-            else{
+            else{ //res가 ok가 아니면 통과
                 isPass = true;
                 alert(username + "아이디를 사용할 수 있어요");
             }
