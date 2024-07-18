@@ -59,9 +59,6 @@
         margin: 30px 0;
     }
 
-
-
-
 </style>
 
 <div class="container">
@@ -88,8 +85,8 @@
                 </div>
                 <div id="verifyEmailContainer" class="verify-userEmail-container">
                     <input class="my_auth_form_box_input" type="text" name="verifyUserEmail" placeholder="인증번호 6자리" maxlength="6"
-                           required />
-                    <button type="submit" class="verify_userEmail_button" >인증하기</button>
+                            />
+                    <button type="button" class="verify_userEmail_button" >인증하기</button>
                 </div>
 
                 <button type="submit" class="my_secondary_btn">회원가입</button>
@@ -108,13 +105,11 @@
     let canUseUserName = false; //유저네임 통과니?
     let canUseEmail = false; // 이메일 사용할 수 있니?
 
-
-
     function submitCheck() {
         console.log("submitCheck 호출됨");
-        console.log("isSame:"+isSame);
-        console.log("canUseUserName : "+ canUseUserName);
-        console.log("canUseEmail : "+ canUseEmail);
+        console.log("isSame" + isSame);
+        console.log("canUseUserName" + canUseUserName);
+        console.log("canUseEmail" + canUseEmail);
 
         //비밀번호 일치
         if (isSame === false) {
@@ -133,7 +128,6 @@
             alert("이메일 인증이 필요합니다.");
             return false;
         }
-
         return true;
     }
 
@@ -180,6 +174,7 @@
     function checkEmail(){
         let userEmail = $("#userEmail").val();
         console.log("email", userEmail);
+
         $.ajax({
             url: "/sendmail",
             method: "get",
@@ -195,10 +190,6 @@
         });
 
     }
-
-    // function sendEmail(){
-    //
-    // }
 
     $("#password, #same-password").on('input', (e) => {
         checkPasswords();
