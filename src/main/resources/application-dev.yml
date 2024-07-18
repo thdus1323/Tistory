@@ -38,6 +38,25 @@ spring:
     defer-datasource-initialization: true
     open-in-view: false
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: codingpractice789@gmail.com
+    password: zfgr wiih upvw pina
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: false
+
+logging:
+  level:
+    org.springframework.mail: DEBUG
+
 #server:
 #  port: 8080
 #  servlet:

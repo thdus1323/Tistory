@@ -89,7 +89,7 @@
                 <div id="verifyEmailContainer" class="verify-userEmail-container">
                     <input class="my_auth_form_box_input" type="text" name="verifyUserEmail" placeholder="인증번호 6자리" maxlength="6"
                            required />
-                    <button type="button" class="verify_userEmail_button" >인증하기</button>
+                    <button type="submit" class="verify_userEmail_button" >인증하기</button>
                 </div>
 
                 <button type="submit" class="my_secondary_btn">회원가입</button>
@@ -180,11 +180,25 @@
     function checkEmail(){
         let userEmail = $("#userEmail").val();
         console.log("email", userEmail);
+        $.ajax({
+            url: "/sendmail",
+            method: "get",
+            data: {userEmail: userEmail}
+        }).done(res=> {
+            alert(res);
 
-        //이메일 인증 성공하면 인증번호 입력 필드, 버튼 표시
-        $("#verifyEmailContainer").css("display", "flex");
-        canUseEmail = true; // 임시로 이메일 인증 성공
+            //이메일 인증 성공하면 인증번호 입력 필드, 버튼 표시
+            $("#verifyEmailContainer").css("display", "flex");
+            canUseEmail = true; // 임시로 이메일 인증 성공
+        }).fail(err => {
+            console.log("실패", err)
+        });
+
     }
+
+    // function sendEmail(){
+    //
+    // }
 
     $("#password, #same-password").on('input', (e) => {
         checkPasswords();
